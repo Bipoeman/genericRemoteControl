@@ -49,9 +49,18 @@ let lastState
 function onUpdate() {
     try {
         const update = player.getUpdate();
+        // console.log(mediaStatus)
         update.then((mediaStatus) => {
-            lastState = mediaStatus['status'];
-            client.publish('/mediaControl/mediaStatus/status', lastState, { retain: true, qos: 2 })
+            // console.log(mediaStatus)
+            if (mediaStatus == undefined){
+                lastState = "Paused";
+                client.publish('/mediaControl/mediaStatus/status', lastState, { retain: true, qos: 2 })
+
+            }
+            else{
+                lastState = mediaStatus['status'];
+                client.publish('/mediaControl/mediaStatus/status', lastState, { retain: true, qos: 2 })
+            }
         });
     }
     catch {
