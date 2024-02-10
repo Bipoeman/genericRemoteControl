@@ -55,7 +55,6 @@ function onUpdate() {
             if (mediaStatus == undefined){
                 lastState = "Paused";
                 client.publish('/mediaControl/mediaStatus/status', lastState, { retain: true, qos: 2 })
-
             }
             else{
                 lastState = mediaStatus['status'];
